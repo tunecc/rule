@@ -44,4 +44,4 @@ URL-REGEX,^.*pcdn.*biliapi\.net
 URL-REGEX,^.*pcdn.*youku\.com
 
 ##下面这条屏蔽会导致看不了直播
-URL-REGEX,^cn-.*\.bilivideo\.(com|cn)
+#URL-REGEX,^cn-.*\.bilivideo\.(com|cn)
