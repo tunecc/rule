@@ -23,7 +23,7 @@
  * - [status] 合法的状态码. 默认 204
  * - [method] 请求方法. 默认 head, 如果测试 URL 不支持, 可设为 get
  * - [show_latency] 显示延迟. 默认不显示. 注: 即使不开启这个参数, 节点上也会添加一个 _latency 字段
- * - [keep_incompatible] 保留当前客户端不兼容的协议. 默认不保留.
+ * - [keep_incompatible] 保留当前客户端不兼容的协议. 默认保留.
  * - [cache] 使用缓存, 默认不使用缓存
  * - [telegram_bot_token] Telegram Bot Token
  * - [telegram_chat_id] Telegram Chat ID
@@ -45,7 +45,7 @@ async function operator(proxies = [], targetPlatform, env) {
   const http_meta_proxy_timeout = parseFloat($arguments.http_meta_proxy_timeout ?? 10000)
 
   const method = $arguments.method || 'head'
-  const keepIncompatible = $arguments.keep_incompatible
+  const keepIncompatible = $arguments.keep_incompatible ?? true
   const validStatus = parseInt($arguments.status || 204)
   const url = decodeURIComponent($arguments.url || 'http://connectivitycheck.gstatic.com/generate_204')
   const ua = decodeURIComponent(
