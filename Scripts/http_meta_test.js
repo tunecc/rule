@@ -5,6 +5,8 @@
  * 说明: https://t.me/zhetengsha/1210
  *原版：https://github.com/xream/scripts/blob/main/surge/modules/sub-store-scripts/check/http_meta_availability.js
  *
+ * sub-store-csr-expiration-time：自定义持久化缓存时长, 默认为 172800000 (48 * 3600 * 1000, 即 48 小时)--说明：https://t.me/zhetengsha/1449
+ * 
  * HTTP META(https://github.com/xream/http-meta) 参数
  * - [http_meta_protocol] 协议 默认: http
  * - [http_meta_host] 服务地址 默认: 192.168.8.20
@@ -22,9 +24,9 @@
  * - [ua] 请求头 User-Agent. 需要 encodeURIComponent. 默认 Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1
  * - [status] 合法的状态码. 默认 204
  * - [method] 请求方法. 默认 head, 如果测试 URL 不支持, 可设为 get
- * - [show_latency] 显示延迟. 默认显示. 注: 即使不开启这个参数, 节点上也会添加一个 _latency 字段
+ * - [show_latency] 显示延迟（&show_latency=true）. 默认显示. 注: 即使不开启这个参数, 节点上也会添加一个 _latency 字段
  * - [keep_incompatible] 保留当前客户端不兼容的协议. 默认保留.
- * - [cache] 使用缓存, 默认不使用缓存
+ * - [cache] 使用缓存（&cache=true）, 默认不使用
  * - [telegram_bot_token] Telegram Bot Token
  * - [telegram_chat_id] Telegram Chat ID
  * - [custom] 自定义的订阅名称
@@ -193,7 +195,7 @@ if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
         if (cached.latency) {
           validProxies.push({
             ...proxy,
-            name: `${$arguments.show_latency ? `[${cached.latency}] ` : ''}${proxy.name}`,
+            name: `${show_latency ? `[${cached.latency}] ` : ''}${proxy.name}`,
             _latency: cached.latency,
           })
         }
@@ -218,7 +220,7 @@ if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
       if (status == validStatus) {
         validProxies.push({
           ...proxy,
-          name: `${$arguments.show_latency ? `[${latency}] ` : ''}${proxy.name}`,
+          name: `${show_latency ? `[${latency}] ` : ''}${proxy.name}`,
           _latency: latency,
         })
         if (cacheEnabled) {
