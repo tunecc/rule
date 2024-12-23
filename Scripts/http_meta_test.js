@@ -3,7 +3,7 @@
  * 节点测活(适配 Sub-Store Node.js 版)
  *
  * 说明: https://t.me/zhetengsha/1210
- *
+ *原版：https://github.com/xream/scripts/blob/main/surge/modules/sub-store-scripts/check/http_meta_availability.js
  *
  * HTTP META(https://github.com/xream/http-meta) 参数
  * - [http_meta_protocol] 协议 默认: http
@@ -14,9 +14,9 @@
  * - [http_meta_proxy_timeout] 每个节点耗时(单位: 毫秒). 此参数是为了防止脚本异常退出未关闭核心. 设置过小将导致核心过早退出. 目前逻辑: 启动初始的延时 + 每个节点耗时. 默认: 10000
  *
  * 其它参数
- * - [timeout] 请求超时(单位: 毫秒) 默认 5000
+ * - [timeout] 请求超时(单位: 毫秒) 默认 800
  * - [retries] 重试次数 默认 1
- * - [retry_delay] 重试延时(单位: 毫秒) 默认 1000
+ * - [retry_delay] 重试延时(单位: 毫秒) 默认 900
  * - [concurrency] 并发数 默认 10
  * - [url] 检测的 URL. 需要 encodeURIComponent. 默认 http://connectivitycheck.gstatic.com/generate_204
  * - [ua] 请求头 User-Agent. 需要 encodeURIComponent. 默认 Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1
@@ -35,14 +35,14 @@ async function operator(proxies = [], targetPlatform, env) {
   const cache = scriptResourceCache
   const telegram_chat_id = $arguments.telegram_chat_id
   const telegram_bot_token = $arguments.telegram_bot_token
-  const http_meta_host = $arguments.http_meta_host || '192.168.8.20'
-  const http_meta_port = $arguments.http_meta_port || 9876
-  const http_meta_protocol = $arguments.http_meta_protocol || 'http'
-  const http_meta_authorization = $arguments.http_meta_authorization || ''
+  const http_meta_host = $arguments.http_meta_host ?? '192.168.8.20'
+  const http_meta_port = $arguments.http_meta_port ?? 9876
+  const http_meta_protocol = $arguments.http_meta_protocol ?? 'http'
+  const http_meta_authorization = $arguments.http_meta_authorization ?? ''
   const http_meta_api = `${http_meta_protocol}://${http_meta_host}:${http_meta_port}`
 
-  const http_meta_start_delay = parseFloat($arguments.http_meta_start_delay || 3000)
-  const http_meta_proxy_timeout = parseFloat($arguments.http_meta_proxy_timeout || 10000)
+  const http_meta_start_delay = parseFloat($arguments.http_meta_start_delay ?? 3000)
+  const http_meta_proxy_timeout = parseFloat($arguments.http_meta_proxy_timeout ?? 10000)
 
   const method = $arguments.method || 'head'
   const keepIncompatible = $arguments.keep_incompatible
@@ -243,9 +243,9 @@ if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
   // 请求
   async function http(opt = {}) {
     const METHOD = opt.method || $arguments.method || 'get'
-    const TIMEOUT = parseFloat(opt.timeout || $arguments.timeout || 5000)
+    const TIMEOUT = parseFloat(opt.timeout || $arguments.timeout || 800)
     const RETRIES = parseFloat(opt.retries ?? $arguments.retries ?? 1)
-    const RETRY_DELAY = parseFloat(opt.retry_delay ?? $arguments.retry_delay ?? 1000)
+    const RETRY_DELAY = parseFloat(opt.retry_delay ?? $arguments.retry_delay ?? 900)
     let count = 0
     const fn = async () => {
       try {
