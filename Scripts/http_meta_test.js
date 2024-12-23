@@ -195,7 +195,7 @@ if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
         if (cached.latency) {
           validProxies.push({
             ...proxy,
-            name: `${show_latency ? `[${cached.latency}] ` : ''}${proxy.name}`,
+            name: `${${show_latency} ? `[${cached.latency}] ` : ''}${proxy.name}`,
             _latency: cached.latency,
           })
         }
@@ -220,7 +220,7 @@ if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
       if (status == validStatus) {
         validProxies.push({
           ...proxy,
-          name: `${show_latency ? `[${latency}] ` : ''}${proxy.name}`,
+          name: `${${show_latency} ? `[${latency}] ` : ''}${proxy.name}`,
           _latency: latency,
         })
         if (cacheEnabled) {
