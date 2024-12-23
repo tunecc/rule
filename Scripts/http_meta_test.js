@@ -19,9 +19,9 @@
  * - [retries] 重试次数 默认 1
  * - [retry_delay] 重试延时(单位: 毫秒) 默认 1000
  * - [concurrency] 并发数 默认 10
- * - [url] 检测的 URL. 需要 encodeURIComponent. 默认 http://www.apple.com/library/test/success.html
+ * - [url] 检测的 URL. 需要 encodeURIComponent. 默认 http://connectivitycheck.gstatic.com/generate_204
  * - [ua] 请求头 User-Agent. 需要 encodeURIComponent. 默认 Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1
- * - [status] 合法的状态码. 默认 200
+ * - [status] 合法的状态码. 默认 204
  * - [method] 请求方法. 默认 head, 如果测试 URL 不支持, 可设为 get
  * - [show_latency] 显示延迟. 默认不显示. 注: 即使不开启这个参数, 节点上也会添加一个 _latency 字段
  * - [keep_incompatible] 保留当前客户端不兼容的协议. 默认不保留.
@@ -36,7 +36,7 @@ async function operator(proxies = [], targetPlatform, env) {
   const cache = scriptResourceCache
   const telegram_chat_id = $arguments.telegram_chat_id
   const telegram_bot_token = $arguments.telegram_bot_token
-  const http_meta_host = $arguments.http_meta_host ?? '127.0.0.1'
+  const http_meta_host = $arguments.http_meta_host ?? '192.168.8.20'
   const http_meta_port = $arguments.http_meta_port ?? 9876
   const http_meta_protocol = $arguments.http_meta_protocol ?? 'http'
   const http_meta_authorization = $arguments.http_meta_authorization ?? ''
@@ -47,8 +47,8 @@ async function operator(proxies = [], targetPlatform, env) {
 
   const method = $arguments.method || 'head'
   const keepIncompatible = $arguments.keep_incompatible
-  const validStatus = parseInt($arguments.status || 200)
-  const url = decodeURIComponent($arguments.url || 'http://www.apple.com/library/test/success.html')
+  const validStatus = parseInt($arguments.status || 204)
+  const url = decodeURIComponent($arguments.url || 'http://connectivitycheck.gstatic.com/generate_204')
   const ua = decodeURIComponent(
     $arguments.ua ||
       'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1'
