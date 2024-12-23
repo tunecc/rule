@@ -4,7 +4,6 @@
  *
  * 说明: https://t.me/zhetengsha/1210
  *
- * 欢迎加入 Telegram 群组 https://t.me/zhetengsha
  *
  * HTTP META(https://github.com/xream/http-meta) 参数
  * - [http_meta_protocol] 协议 默认: http
@@ -38,8 +37,8 @@ async function operator(proxies = [], targetPlatform, env) {
   const telegram_bot_token = $arguments.telegram_bot_token
   const http_meta_host = $arguments.http_meta_host || '192.168.8.20'
   const http_meta_port = $arguments.http_meta_port || 9876
-  const http_meta_protocol = $arguments.http_meta_protocol ?? 'http'
-  const http_meta_authorization = $arguments.http_meta_authorization ?? ''
+  const http_meta_protocol = $arguments.http_meta_protocol || 'http'
+  const http_meta_authorization = $arguments.http_meta_authorization || ''
   const http_meta_api = `${http_meta_protocol}://${http_meta_host}:${http_meta_port}`
 
   const http_meta_start_delay = parseFloat($arguments.http_meta_start_delay || 3000)
