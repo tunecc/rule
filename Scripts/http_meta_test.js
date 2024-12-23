@@ -17,12 +17,12 @@
  * - [timeout] 请求超时(单位: 毫秒) 默认 800
  * - [retries] 重试次数 默认 1
  * - [retry_delay] 重试延时(单位: 毫秒) 默认 900
- * - [concurrency] 并发数 默认 10
+ * - [concurrency] 并发数 默认 30
  * - [url] 检测的 URL. 需要 encodeURIComponent. 默认 http://connectivitycheck.gstatic.com/generate_204
  * - [ua] 请求头 User-Agent. 需要 encodeURIComponent. 默认 Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1
  * - [status] 合法的状态码. 默认 204
  * - [method] 请求方法. 默认 head, 如果测试 URL 不支持, 可设为 get
- * - [show_latency] 显示延迟. 默认不显示. 注: 即使不开启这个参数, 节点上也会添加一个 _latency 字段
+ * - [show_latency] 显示延迟. 默认显示. 注: 即使不开启这个参数, 节点上也会添加一个 _latency 字段
  * - [keep_incompatible] 保留当前客户端不兼容的协议. 默认保留.
  * - [cache] 使用缓存, 默认不使用缓存
  * - [telegram_bot_token] Telegram Bot Token
@@ -60,6 +60,7 @@ async function operator(proxies = [], targetPlatform, env) {
   const sub = env.source[proxies?.[0]?._subName || proxies?.[0]?.subName]
   const subName = sub?.displayName || sub?.name
   const custom = $arguments.custom || subName
+  const show_latency = $arguments.show_latency ?? true
 
   proxies.map((proxy, index) => {
     try {
@@ -121,7 +122,7 @@ async function operator(proxies = [], targetPlatform, env) {
   $.info(`等待 ${http_meta_start_delay / 1000} 秒后开始检测`)
   await $.wait(http_meta_start_delay)
 
-  const concurrency = parseInt($arguments.concurrency || 10) // 一组并发数
+  const concurrency = parseInt($arguments.concurrency || 30) // 一组并发数
   await executeAsyncTasks(
     internalProxies.map(proxy => () => check(proxy)),
     { concurrency }
