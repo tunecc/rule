@@ -158,7 +158,7 @@ async function operator(proxies = [], targetPlatform, env) {
 
 // 发送 Telegram 通知
 if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
-    const text = `\`${custom}\` 订阅测试\n有${failedProxies.length}行`
+    const text = `\`${custom}\` \n${failedProxies.length}行节点不可用`
     
     await http({
         method: 'post',
