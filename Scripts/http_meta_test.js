@@ -1,6 +1,6 @@
 /**
+ *修改了一些我自用的参数为默认值
  *
- * 节点测活(适配 Sub-Store Node.js 版)
  *
  * 说明: https://t.me/zhetengsha/1210
  *原版：https://github.com/xream/scripts/blob/main/surge/modules/sub-store-scripts/check/http_meta_availability.js
@@ -158,8 +158,7 @@ async function operator(proxies = [], targetPlatform, env) {
 
 // 发送 Telegram 通知
 if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
-    // 修改后的消息内容，保留 `${subName}` 节点测试，并添加 `n条无用节点`
-    const text = `\`${custom}\` 订阅测试\n${failedProxies.length}条无用节点`
+    const text = `\`${custom}\` 订阅测试\n有${failedProxies.length}行`
     
     await http({
         method: 'post',
