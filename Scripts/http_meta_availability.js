@@ -1,6 +1,6 @@
 /**
- *修改了一些我自用的参数为默认值
  *
+ * 节点测活(适配 Sub-Store Node.js 版)
  *
  * 说明: https://t.me/zhetengsha/1210
  *原版：https://github.com/xream/scripts/blob/main/surge/modules/sub-store-scripts/check/http_meta_availability.js
@@ -16,9 +16,9 @@
  * - [http_meta_proxy_timeout] 每个节点耗时(单位: 毫秒). 此参数是为了防止脚本异常退出未关闭核心. 设置过小将导致核心过早退出. 目前逻辑: 启动初始的延时 + 每个节点耗时. 默认: 10000
  *
  * 其它参数
- * - [timeout] 请求超时(单位: 毫秒) 默认 800
+ * - [timeout] 请求超时(单位: 毫秒) 默认 700
  * - [retries] 重试次数 默认 1
- * - [retry_delay] 重试延时(单位: 毫秒) 默认 900
+ * - [retry_delay] 重试延时(单位: 毫秒) 默认 800
  * - [concurrency] 并发数 默认 30
  * - [url] 检测的 URL. 需要 encodeURIComponent. 默认 http://connectivitycheck.gstatic.com/generate_204
  * - [ua] 请求头 User-Agent. 需要 encodeURIComponent. 默认 Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1
@@ -29,7 +29,6 @@
  * - [cache] 使用缓存（&cache=true）, 默认不使用
  * - [telegram_bot_token] Telegram Bot Token
  * - [telegram_chat_id] Telegram Chat ID
- * - [custom] 自定义的订阅名称
  */
 
 async function operator(proxies = [], targetPlatform, env) {
@@ -59,9 +58,17 @@ async function operator(proxies = [], targetPlatform, env) {
   const incompatibleProxies = []
   const internalProxies = []
   const failedProxies = []
-  const sub = env.source[proxies?.[0]?._subName || proxies?.[0]?.subName]
-  const subName = sub?.displayName || sub?.name
-  const custom = $arguments.custom || subName
+  let name = ''
+  for (const [key, value] of Object.entries(env.source)) {
+    if (!key.startsWith('_')) {
+      name = value.displayName || value.name
+      break
+    }
+  }
+  if (!name) {
+    const collection = env.source._collection
+    name = collection.displayName || collection.name
+  }
   const show_latency = $arguments.show_latency ?? true
 
   proxies.map((proxy, index) => {
@@ -158,20 +165,16 @@ async function operator(proxies = [], targetPlatform, env) {
 
 // 发送 Telegram 通知
 if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
-    const text = `\`${custom}\` \n${failedProxies.length}行节点不可用`
-    
+    const text = `\`${name}\` \n${failedProxies.length}行节点不可用`
+
     await http({
         method: 'post',
         url: `https://api.telegram.org/bot${telegram_bot_token}/sendMessage`,
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-            chat_id: telegram_chat_id, 
-            text, 
-            parse_mode: 'MarkdownV2' 
-        }),
-        retries: 0,
+      body: JSON.stringify({ chat_id: telegram_chat_id, text, parse_mode: 'MarkdownV2' }),
+      retries: 0,
     })
 }
 
@@ -246,9 +249,9 @@ if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
   // 请求
   async function http(opt = {}) {
     const METHOD = opt.method || $arguments.method || 'get'
-    const TIMEOUT = parseFloat(opt.timeout || $arguments.timeout || 800)
+    const TIMEOUT = parseFloat(opt.timeout || $arguments.timeout || 700)
     const RETRIES = parseFloat(opt.retries ?? $arguments.retries ?? 1)
-    const RETRY_DELAY = parseFloat(opt.retry_delay ?? $arguments.retry_delay ?? 900)
+    const RETRY_DELAY = parseFloat(opt.retry_delay ?? $arguments.retry_delay ?? 800)
     let count = 0
     const fn = async () => {
       try {
