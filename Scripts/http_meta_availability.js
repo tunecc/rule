@@ -171,6 +171,7 @@ if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
             text, 
             parse_mode: 'MarkdownV2' 
         }),
+        retries: 0,
     })
 }
 
