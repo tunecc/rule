@@ -30,9 +30,8 @@
  * - [telegram_chat_id] Telegram Chat ID
  * - [custom] 用户输入的自定义订阅名字
  */
-
+    
 async function operator(proxies = [], targetPlatform, env) {
-  // 初始化 $ 对象，用于日志记录
   const $ = $substore;
   const cacheEnabled = $arguments.cache;
   const cache = scriptResourceCache;
@@ -60,7 +59,7 @@ async function operator(proxies = [], targetPlatform, env) {
   const custom = $arguments.custom || subName || '默认订阅';
   
   // 添加日志记录自定义订阅名称
-  $.info(`自定义订阅名称: ${custom}`);
+  $.info(`订阅名称: ${custom}`);
 
   const validProxies = [];
   const incompatibleProxies = [];
@@ -156,31 +155,42 @@ async function operator(proxies = [], targetPlatform, env) {
     $.error(e);
   }
 
-// 发送 Telegram 通知
-if (telegram_chat_id && telegram_bot_token && validProxies.length > 0) {
-  const fastestProxy = validProxies.reduce((fastest, proxy) => proxy._speed > fastest._speed ? proxy : fastest, validProxies[0]);
-  const slowestProxy = validProxies.reduce((slowest, proxy) => proxy._speed < slowest._speed ? proxy : slowest, validProxies[0]);
-  
-  // 定义 escapeMarkdown 函数，用于转义 Markdown 中的特殊字符
-  function escapeMarkdown(text) {
-    return text.replace(/([_*[\]()~`>#+\-=\|{}.!])/g, '\\$1');
+  // 发送 Telegram 通知
+  if (telegram_chat_id && telegram_bot_token && validProxies.length > 0) {
+    // 找到速度最快和最慢的代理节点
+    const fastestProxy = validProxies.reduce((fastest, proxy) => 
+      proxy._speed > fastest._speed ? proxy : fastest, validProxies[0]);
+    const slowestProxy = validProxies.reduce((slowest, proxy) => 
+      proxy._speed < slowest._speed ? proxy : slowest, validProxies[0]);
+    
+    // 定义 escapeMarkdown 函数，用于转义 Markdown 中的特殊字符
+    function escapeMarkdown(text) {
+      return text.replace(/([_*[\]()~`>#+\-=\|{}.!])/g, '\\$1');
+    }
+
+    // 计算速度低于阈值的节点数量
+    const lowSpeedCount = internalProxies.length - validProxies.length;
+
+    // 构建 Telegram 消息文本
+    const text = `${escapeMarkdown(custom)} 速度测试\n` +
+                 `最快节点：${escapeMarkdown(fastestProxy.name)}\n` +
+                 `最慢节点：${escapeMarkdown(slowestProxy.name)}\n` +
+                 `速度低于 ${minSpeed}Mpbs 的有 ${lowSpeedCount} 个\n`+
+                 `剩余 ${validProxies.length} 个节点\n`
+
+    await http({
+       method: 'post',
+       url: `https://api.telegram.org/bot${telegram_bot_token}/sendMessage`,
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({ 
+         chat_id: telegram_chat_id, 
+         text, 
+         parse_mode: 'MarkdownV2'
+       }),
+    });
   }
-
-  const text = `${escapeMarkdown(custom)}速度测试\n最快节点为：${escapeMarkdown(fastestProxy.name)}\n最慢节点为：${escapeMarkdown(slowestProxy.name)}\n共${validProxies.length}个节点`;
-
-  await http({
-     method: 'post',
-     url: `https://api.telegram.org/bot${telegram_bot_token}/sendMessage`,
-     headers: {
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({ 
-       chat_id: telegram_chat_id, 
-       text, 
-       parse_mode: 'MarkdownV2'
-     }),
-  });
-}
 
   return (keepIncompatible ? [...validProxies, ...incompatibleProxies] : validProxies).sort(
     (a, b) => b._speed - a._speed
