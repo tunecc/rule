@@ -1,11 +1,9 @@
 /**
  *
- * 节点测活(适配 Sub-Store Node.js 版)
- *
+ * 节点测活(自用)
+ * 原版：https://github.com/xream/scripts/blob/main/surge/modules/sub-store-scripts/check/http_meta_availability.js
  * 说明: https://t.me/zhetengsha/1210
- *原版：https://github.com/xream/scripts/blob/main/surge/modules/sub-store-scripts/check/http_meta_availability.js
- *
- * sub-store-csr-expiration-time：自定义持久化缓存时长, 默认为 172800000 (48 * 3600 * 1000, 即 48 小时)--说明：https://t.me/zhetengsha/1449
+ * 
  * 
  * HTTP META(https://github.com/xream/http-meta) 参数
  * - [http_meta_protocol] 协议 默认: http
@@ -16,9 +14,9 @@
  * - [http_meta_proxy_timeout] 每个节点耗时(单位: 毫秒). 此参数是为了防止脚本异常退出未关闭核心. 设置过小将导致核心过早退出. 目前逻辑: 启动初始的延时 + 每个节点耗时. 默认: 10000
  *
  * 其它参数
- * - [timeout] 请求超时(单位: 毫秒) 默认 700
+ * - [timeout] 请求超时(单位: 毫秒) 默认 800
  * - [retries] 重试次数 默认 1
- * - [retry_delay] 重试延时(单位: 毫秒) 默认 800
+ * - [retry_delay] 重试延时(单位: 毫秒) 默认 900
  * - [concurrency] 并发数 默认 30
  * - [url] 检测的 URL. 需要 encodeURIComponent. 默认 http://connectivitycheck.gstatic.com/generate_204
  * - [ua] 请求头 User-Agent. 需要 encodeURIComponent. 默认 Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1
@@ -29,6 +27,7 @@
  * - [cache] 使用缓存（&cache=true）, 默认不使用
  * - [telegram_bot_token] Telegram Bot Token
  * - [telegram_chat_id] Telegram Chat ID
+ * sub-store-csr-expiration-time：自定义持久化缓存时长, 默认为 172800000 (48 * 3600 * 1000, 即 48 小时)--说明：https://t.me/zhetengsha/1449
  */
 
 async function operator(proxies = [], targetPlatform, env) {
@@ -250,9 +249,9 @@ async function operator(proxies = [], targetPlatform, env) {
   // 请求
   async function http(opt = {}) {
     const METHOD = opt.method || $arguments.method || 'get'
-    const TIMEOUT = parseFloat(opt.timeout || $arguments.timeout || 700)
+    const TIMEOUT = parseFloat(opt.timeout || $arguments.timeout || 800)
     const RETRIES = parseFloat(opt.retries ?? $arguments.retries ?? 1)
-    const RETRY_DELAY = parseFloat(opt.retry_delay ?? $arguments.retry_delay ?? 800)
+    const RETRY_DELAY = parseFloat(opt.retry_delay ?? $arguments.retry_delay ?? 900)
     let count = 0
     const fn = async () => {
       try {
