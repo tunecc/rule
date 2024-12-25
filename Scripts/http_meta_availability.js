@@ -163,20 +163,20 @@ async function operator(proxies = [], targetPlatform, env) {
     $.error(e)
   }
 
-// 发送 Telegram 通知
-if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
-    const text = `\`${name}\` \n${failedProxies.length}行节点不可用`
-
-    await http({
-        method: 'post',
-        url: `https://api.telegram.org/bot${telegram_bot_token}/sendMessage`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-      body: JSON.stringify({ chat_id: telegram_chat_id, text, parse_mode: 'MarkdownV2' }),
-      retries: 0,
-    })
-}
+  // 发送 Telegram 通知
+  if (telegram_chat_id && telegram_bot_token && failedProxies.length > 0) {
+      const text = `\`${name}\` \n${failedProxies.length}行节点不可用`
+  
+      await http({
+          method: 'post',
+          url: `https://api.telegram.org/bot${telegram_bot_token}/sendMessage`,
+          headers: {
+              'Content-Type': 'application/json',
+          },
+        body: JSON.stringify({ chat_id: telegram_chat_id, text, parse_mode: 'MarkdownV2' }),
+        retries: 0,
+      })
+  }
 
   return keepIncompatible ? [...validProxies, ...incompatibleProxies] : validProxies
 
