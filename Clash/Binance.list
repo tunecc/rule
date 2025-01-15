@@ -1,5 +1,8 @@
 ##规则来自https://github.com/StricklandF/Filter/blob/main/Binance.list
 
+#小红卡
+DOMAIN-SUFFIX,redotpay.com
+
 DOMAIN,www.binance.com
 DOMAIN,api.binance.com
 DOMAIN,fapibak.binance.com
