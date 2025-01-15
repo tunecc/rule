@@ -10,7 +10,7 @@
  * - [http_meta_host] 服务地址 默认: 192.168.8.20
  * - [http_meta_port] 端口号 默认: 9876
  * - [http_meta_authorization] Authorization 默认无
- * - [http_meta_start_delay] 初始启动延时(单位: 毫秒) 默认: 3000
+ * - [http_meta_start_delay] 初始启动延时(单位: 毫秒) 默认: 1500
  * - [http_meta_proxy_timeout] 每个节点耗时(单位: 毫秒). 此参数是为了防止脚本异常退出未关闭核心. 设置过小将导致核心过早退出. 目前逻辑: 启动初始的延时 + 每个节点耗时. 默认: 10000
  *
  * 其它参数
@@ -41,7 +41,7 @@ async function operator(proxies = [], targetPlatform, env) {
   const http_meta_authorization = $arguments.http_meta_authorization ?? ''
   const http_meta_api = `${http_meta_protocol}://${http_meta_host}:${http_meta_port}`
 
-  const http_meta_start_delay = parseFloat($arguments.http_meta_start_delay ?? 3000)
+  const http_meta_start_delay = parseFloat($arguments.http_meta_start_delay ?? 1500)
   const http_meta_proxy_timeout = parseFloat($arguments.http_meta_proxy_timeout ?? 10000)
 
   const method = $arguments.method || 'head'
