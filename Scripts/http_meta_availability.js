@@ -46,7 +46,7 @@ async function operator(proxies = [], targetPlatform, env) {
 
   const method = $arguments.method || 'head'
   const keepIncompatible = $arguments.keep_incompatible ?? true
-  const validStatus = parseInt($arguments.status || 204)
+  const validStatus = new RegExp($arguments.status || '204')
   const url = decodeURIComponent($arguments.url || 'http://connectivitycheck.gstatic.com/generate_204')
   const ua = decodeURIComponent(
     $arguments.ua ||
@@ -220,7 +220,7 @@ async function operator(proxies = [], targetPlatform, env) {
       latency = `${Date.now() - startedAt}`
       $.info(`[${proxy.name}] status: ${status}, latency: ${latency}`)
       // 判断响应
-      if (status == validStatus) {
+      if (validStatus.test(status)) {
         validProxies.push({
           ...ProxyUtils.parse(JSON.stringify(proxy))[0],
           name: `${show_latency ? `[${latency}] ` : ''}${proxy.name}`,
