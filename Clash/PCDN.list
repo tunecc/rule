@@ -20,5 +20,5 @@ DOMAIN-REGEX,^.*pcdn.*biliapi\.net
 DOMAIN-REGEX,^.*pcdn.*youku\.com
 DOMAIN-REGEX,^.*p2p.*douyucdn\.cn
 DOMAIN-REGEX,^.*p2p.*qq\.com
-DOMAIN-REGEX,^.*pcdn.*biliapi.net
-DOMAIN-REGEX,^.*pcdn.*youku.com
+DOMAIN-REGEX,^.*pcdn.*biliapi\.net
+DOMAIN-REGEX,^.*pcdn.*youku\.com
