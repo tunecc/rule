@@ -1,0 +1,35 @@
+# Apple Music 直连规则
+# 规则来自：https://github.com/zhcnChatbot/clash-rules-AppleMusicSingapore/blob/main/direct.txt
+# https://blog.butanediol.me/2020/05/07/%E6%8F%90%E5%8D%87%E5%9B%BD%E5%86%85-Apple-Music-%E4%BD%93%E9%AA%8C%E7%9A%84%E4%BB%A3%E7%90%86%E8%A7%84%E5%88%99/
+# 该部分推荐直连，在中国大陆有CDN节点
+
+# 页面：歌曲、歌单、艺人、专辑、MV
+# music.apple.com/[country_code]，速度视运营商情况而定，此处不做分流，避免影响子域名
+# DOMAIN,music.apple.com
+
+# 初始化
+DOMAIN-SUFFIX,init.itunes.apple.com
+
+# 搜索相关
+DOMAIN-SUFFIX,amp-api.music.apple.com
+
+# MV播放
+DOMAIN-SUFFIX,mvod.itunes.apple.com
+
+# Apple Music 歌曲播放
+DOMAIN-SUFFIX,aod.itunes.apple.com
+DOMAIN-SUFFIX,play.itunes.apple.com
+
+# 不知道是做什么用的
+DOMAIN-SUFFIX,client-api.itunes.apple.com
+DOMAIN-SUFFIX,se2.itunes.apple.com
+
+# macOS、iOS 和 iTunes 使用
+DOMAIN-SUFFIX,xp.apple.com
+
+# 资料库更新
+DOMAIN-SUFFIX,librarydaap.itunes.apple.com
+DOMAIN-SUFFIX,sync.itunes.apple.com
+
+# Siri、听写功能
+DOMAIN-SUFFIX,guzzoni.apple.com

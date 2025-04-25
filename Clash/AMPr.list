@@ -1,0 +1,32 @@
+# Apple Music 代理规则
+# 来自于：https://github.com/zhcnChatbot/clash-rules-AppleMusicSingapore/blob/main/proxy.txt
+# https://blog.butanediol.me/2020/05/07/%E6%8F%90%E5%8D%87%E5%9B%BD%E5%86%85-Apple-Music-%E4%BD%93%E9%AA%8C%E7%9A%84%E4%BB%A3%E7%90%86%E8%A7%84%E5%88%99/
+
+# apple music 1 等 apple 直播
+DOMAIN-SUFFIX,radio.itunes.apple.com
+DOMAIN-SUFFIX,radio-activity.itunes.apple.com
+
+# Beats 1 直播
+DOMAIN-SUFFIX,itsliveradio.apple.com
+
+# Beats 1 视频
+DOMAIN-SUFFIX,aodp-ssl.apple.com
+
+# 电视、电影预告片
+DOMAIN-SUFFIX,video-ssl.itunes.apple.com
+DOMAIN-SUFFIX,mvod.itunes.apple.com
+
+# 电视、电影正片
+DOMAIN-SUFFIX,hls-amt.itunes.apple.com
+
+# iTunes Store 音乐试听
+DOMAIN-SUFFIX,audio-ssl.itunes.apple.com
+
+# iTunes Store 购买后播放
+DOMAIN-SUFFIX,streamingaudio.itunes.apple.com
+
+# iCloud 资料库上传
+DOMAIN-SUFFIX,amazonaws.com
+
+# 资料库中自己上传的歌曲
+DOMAIN-SUFFIX,blobstore.apple.com
