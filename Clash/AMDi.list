@@ -20,6 +20,9 @@ DOMAIN-SUFFIX,mvod.itunes.apple.com
 DOMAIN-SUFFIX,aod.itunes.apple.com
 DOMAIN-SUFFIX,play.itunes.apple.com
 
+# Apple Music 歌曲下载
+DOMAIN-SUFFIX,streamingaudio.itunes.apple.com
+
 # 不知道是做什么用的
 DOMAIN-SUFFIX,client-api.itunes.apple.com
 DOMAIN-SUFFIX,se2.itunes.apple.com

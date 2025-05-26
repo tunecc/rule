@@ -22,8 +22,8 @@ DOMAIN-SUFFIX,hls-amt.itunes.apple.com
 # iTunes Store 音乐试听
 DOMAIN-SUFFIX,audio-ssl.itunes.apple.com
 
-# iTunes Store 购买后播放
-DOMAIN-SUFFIX,streamingaudio.itunes.apple.com
+# iTunes Store 购买后播放，Apple Music下载走直连更好
+# DOMAIN-SUFFIX,streamingaudio.itunes.apple.com
 
 # iCloud 资料库上传
 DOMAIN-SUFFIX,amazonaws.com
