@@ -12,9 +12,8 @@ DOMAIN-SUFFIX,init.itunes.apple.com
 -
 # 搜索相关
 ##直连播放不了歌曲
-## DOMAIN-SUFFIX,amp-api.music.apple.com
-
-DOMAIN-SUFFIX,amp-api-edge.music.apple.com
+##DOMAIN-SUFFIX,amp-api.music.apple.com
+##DOMAIN-SUFFIX,amp-api-edge.music.apple.com
 
 # MV播放
 DOMAIN-SUFFIX,mvod.itunes.apple.com
