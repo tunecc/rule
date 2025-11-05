@@ -9,7 +9,7 @@
 
 # 初始化
 DOMAIN-SUFFIX,init.itunes.apple.com
--
+
 # 搜索相关
 ##直连播放不了歌曲
 ##DOMAIN-SUFFIX,amp-api.music.apple.com
@@ -25,7 +25,7 @@ DOMAIN-SUFFIX,aod.itunes.apple.com
 ##DOMAIN-SUFFIX,play.itunes.apple.com
 
 # Apple Music 歌曲下载
-DOMAIN-SUFFIX,streamingaudio.itunes.apple.com
+#DOMAIN-SUFFIX,streamingaudio.itunes.apple.com
 
 # 不知道是做什么用的
 DOMAIN-SUFFIX,client-api.itunes.apple.com
