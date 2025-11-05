@@ -11,28 +11,25 @@
 DOMAIN-SUFFIX,init.itunes.apple.com
 
 # 搜索相关
-##直连播放不了歌曲
-##DOMAIN-SUFFIX,amp-api.music.apple.com
-##DOMAIN-SUFFIX,amp-api-edge.music.apple.com
+DOMAIN-SUFFIX,amp-api.music.apple.com
+DOMAIN-SUFFIX,amp-api-edge.music.apple.com
 
 # MV播放
 DOMAIN-SUFFIX,mvod.itunes.apple.com
 
 # Apple Music 歌曲播放
 DOMAIN-SUFFIX,aod.itunes.apple.com
-
-##直连体验不佳
-##DOMAIN-SUFFIX,play.itunes.apple.com
+DOMAIN-SUFFIX,play.itunes.apple.com
 
 # Apple Music 歌曲下载
-#DOMAIN-SUFFIX,streamingaudio.itunes.apple.com
+DOMAIN-SUFFIX,streamingaudio.itunes.apple.com
 
 # 不知道是做什么用的
 DOMAIN-SUFFIX,client-api.itunes.apple.com
 DOMAIN-SUFFIX,se2.itunes.apple.com
 
 # macOS、iOS 和 iTunes 使用
-##DOMAIN-SUFFIX,xp.apple.com
+DOMAIN-SUFFIX,xp.apple.com
 
 # 资料库更新
 DOMAIN-SUFFIX,librarydaap.itunes.apple.com
