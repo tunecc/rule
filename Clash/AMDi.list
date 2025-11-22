@@ -11,6 +11,7 @@
 DOMAIN-SUFFIX,init.itunes.apple.com
 
 # 搜索相关
+# Apple Music App 获取歌词
 DOMAIN-SUFFIX,amp-api.music.apple.com
 DOMAIN-SUFFIX,amp-api-edge.music.apple.com
 

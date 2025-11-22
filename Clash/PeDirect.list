@@ -1,3 +1,8 @@
 DOMAIN-SUFFIX,lzf.email
 DOMAIN-SUFFIX,v2.argotunnel.com
 DOMAIN-SUFFIX,ilife798.com
+
+###iCloud上传
+DOMAIN-SUFFIX,apple-dns.net
+DOMAIN,gateway.icloud.com
+DOMAIN-SUFFIX,icloud-content.com
