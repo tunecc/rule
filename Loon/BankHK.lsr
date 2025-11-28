@@ -1,18 +1,38 @@
 ## 来自：https://github.com/Accademia/Additional_Rule_For_Clash/blob/refs/heads/main/Bank/BankHK.yaml
 
-DOMAIN-SUFFIX, hsbc.com.hk               # 汇丰香港
-DOMAIN, hk.hsbc.com                      # 汇丰香港
-DOMAIN-SUFFIX, .hk.hsbc.com              # 汇丰香港
-DOMAIN-SUFFIX, bochk.com                 # 中银香港
-DOMAIN-SUFFIX, ocbcwhhk.com              # 华侨永亨
-DOMAIN-SUFFIX, hangseng.com              # 恒生银行
-DOMAIN-SUFFIX, cmbwinglungbank.com       # 招商永隆
-DOMAIN-SUFFIX, cncbinternational.com     # 中信国际
-DOMAIN-SUFFIX, hsbc.com.hk               # 汇丰香港
-DOMAIN-SUFFIX, sc.com.hk                 # 渣打香港
-DOMAIN-SUFFIX, citibank.com.hk           # 花旗香港
-DOMAIN-SUFFIX, dbs.com.hk                # 星展香港
-DOMAIN-SUFFIX, ncb.com.hk                # 南洋银行
-DOMAIN-SUFFIX, za.group                  # 众安银行
-DOMAIN-SUFFIX, cdn.zaticdn.com           # 众安银行
-    
+# 汇丰香港
+DOMAIN-SUFFIX,hsbc.com.hk
+DOMAIN,hk.hsbc.com
+DOMAIN-SUFFIX,hk.hsbc.com
+DOMAIN-SUFFIX,hsbc.com.hk
+
+# 中银香港
+DOMAIN-SUFFIX,bochk.com
+
+# 华侨永亨
+DOMAIN-SUFFIX,ocbcwhhk.com
+
+# 恒生银行
+DOMAIN-SUFFIX,hangseng.com
+
+# 招商永隆
+DOMAIN-SUFFIX,cmbwinglungbank.com
+
+# 中信国际
+DOMAIN-SUFFIX,cncbinternational.com
+
+# 渣打香港
+DOMAIN-SUFFIX,sc.com.hk
+
+# 花旗香港
+DOMAIN-SUFFIX,citibank.com.hk
+
+# 星展香港
+DOMAIN-SUFFIX,dbs.com.hk
+
+# 南洋银行
+DOMAIN-SUFFIX,ncb.com.hk
+
+# 众安银行
+DOMAIN-SUFFIX,za.group
+DOMAIN-SUFFIX,cdn.zaticdn.com
