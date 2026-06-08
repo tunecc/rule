@@ -1,7 +1,19 @@
-DOMAIN-SUFFIX,v2.argotunnel.com
-DOMAIN-SUFFIX,ilife798.com
+##黑与白
+DOMAIN-SUFFIX,hybgzs.com
+
+##公益站
+DOMAIN-SUFFIX,sharedchat.cc
+
+
+
+
+
+
+
+
+##DOMAIN-SUFFIX,v2.argotunnel.com
 
 ###iCloud上传
-DOMAIN-SUFFIX,apple-dns.net
-DOMAIN,gateway.icloud.com
-DOMAIN-SUFFIX,icloud-content.com
+##DOMAIN-SUFFIX,apple-dns.net
+##DOMAIN,gateway.icloud.com
+##DOMAIN-SUFFIX,icloud-content.com
